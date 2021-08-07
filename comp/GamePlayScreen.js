@@ -1,6 +1,8 @@
+// import Phaser from 'phaser'
+
 import eventsCenter from "./EventCentre.js"
 
-let flying
+let tochinGround
 
 class GamePlayScreen extends Phaser.Scene
 {
@@ -21,6 +23,7 @@ class GamePlayScreen extends Phaser.Scene
     //===================================================================================================
     //------------------------------------CREATE-------------------------------------------------------  
     create (){
+        this.matter.world.setBounds(0, 0, 3120, 720);
         //----------------------------Temp Background
         //----------------------planning to add Parallax Effect Background
         const wit = 780/2
@@ -35,11 +38,12 @@ class GamePlayScreen extends Phaser.Scene
         this.createWater()
         this.createPlayer()
         this.createCoins()
+        this.player.setOnCollide(()=>{tochinGround=true})
         this.scene.run('ui-scene')
 
         this.cursors = this.input.keyboard.createCursorKeys()
 
-        this.cameras.main.setBounds(64,60,8*wit,9*64)
+        this.cameras.main.setBounds(0,0,3120,520)
         this.cameras.main.startFollow(this.player)
     }
     //===========================================================================================
@@ -64,7 +68,7 @@ class GamePlayScreen extends Phaser.Scene
         this.waterLayer = this.map.getObjectLayer('Water')
         
         this.waterLayer.objects.forEach(waterObj=>{
-            this.aWater = this.add.sprite(waterObj.x+65, waterObj.y, 'water')
+            this.aWater = this.add.sprite(waterObj.x+65, waterObj.y+8, 'water')
             this.aWater.setOrigin(0)
             this.aWater.anims.play('water')
         })
@@ -73,9 +77,9 @@ class GamePlayScreen extends Phaser.Scene
     createMap(){
         this.map = this.make.tilemap({ key: 'FirstMap' })
         this.tileset = this.map.addTilesetImage('base64', 'tileSet')
-        this.ground = this.map.tilma
         this.ground = this.map.createLayer('Ground', this.tileset)
         this.map.setCollisionByProperty({type: 'c'}, true)
+        this.matter.world.convertTilemapLayer(this.ground)
     }
     
 
@@ -94,19 +98,26 @@ class GamePlayScreen extends Phaser.Scene
             repeat: -1
         })
         //Creating coins group from Tiled
-        this.bCoins = this.physics.add.group({
+        this.bCoins = this.add.group({
             classType: 'bCoin'
         })
         this.bCoinsLayer = this.map.getObjectLayer('Coins')
         //set the setting forEach Coin
         this.bCoinsLayer.objects.forEach(coinObj=>{
-            this.bCoin = this.physics.add.sprite(coinObj.x+coinObj.width*0.5, coinObj.y, 'bCoin')
-            this.bCoin.body.allowGravity = false
+            this.bCoin = this.add.sprite(coinObj.x+coinObj.width*0.5, coinObj.y, 'bCoin')
             this.bCoin.scale = 0.7
-            this.bCoin.setCircle(20)
+            this.aCoin = this.matter.add.polygon(coinObj.x+coinObj.width*0.5, coinObj.y, 1, 12)
+            this.aCoin.isSensor = true
+            this.matter.add.gameObject(this.bCoin, this.aCoin)
+                .setStatic(true)
+            
+            // this.bCoin.body.allowGravity = false
+            // this.bCoin.setCircle(20)
+            // this.bCoin.body.onOverlap = true
+
+            // this.matter.add.overlap(this.bCoin , this.player, this.setTheScore)
+
             this.bCoin.anims.play('coin1')
-            this.bCoin.body.onOverlap = true
-            this.physics.add.overlap(this.bCoin , this.player, this.setTheScore)
             })
     }
 
@@ -137,12 +148,19 @@ class GamePlayScreen extends Phaser.Scene
     //-----------------------------Player-----------------------------------------
     createPlayer(){
         //create the player phisics
-        this.player = this.physics.add.sprite(150, 250, 'cherry')
-        this.physics.add.collider(this.player, this.ground)
-        this.player.setBodySize(75,65)
-        this.player.body.onOverlap = true
+        this.player = this.add.sprite(150, 250, 'cherry', 'idle-1')
+        this.square = this.matter.add.rectangle(100, 300, 90, 75, { 
+            chamfer: { radius: 20 }
+        })
+        
+        this.matter.add.gameObject(this.player,this.square)
+            .setFriction(0.001)
+            .setBounce(0.2)
+            .setFixedRotation()
+
 
         //creating the animations for the player
+
         this.anims.create({
             key: 'playIdle',
             frames: this.anims.generateFrameNames('cherry', {
@@ -194,44 +212,41 @@ class GamePlayScreen extends Phaser.Scene
 //========================================================================================================
 //--------------------------UPDATE-----------------------------------
     update (t, dt){
-        
+        const speed = 2
         // if (this.cursors.down.isDown && !this.player.body.onFloor()){
         //     this.player.setVelocityY(350)
         //     this.player.play('playFall', true)
         // }
 
-        if (!this.player.body.onFloor()){
-            this.player.setOffset(0,100)
-            this.time.delayedCall(500, this.onEvent, [], this)
+        if (!tochinGround){
+            // this.player.play('playFall', true)
+            this.time.delayedCall(450, this.onEvent, [], this)
         }
 
         if (this.cursors.left.isDown) {
-            this.player.setVelocityX(-200)
+            this.player.setVelocityX(-speed)
             this.player.setFlipX(true)
-            this.player.setOffset(15, 10)
-            if (this.player.body.onFloor()) {
+            if (tochinGround) {
                 this.player.play('playRun', true)
             }
         } else if (this.cursors.right.isDown) {
-            this.player.setVelocityX(200)
+            this.player.setVelocityX(speed)
             this.player.setFlipX(false)
-            this.player.setOffset(60, 10)
-            if (this.player.body.onFloor()) {
+            if (tochinGround) {
                 this.player.play('playRun', true)
             }
         } else {
             this.player.setVelocityX(0)
-            this.player.setOffset(30, 10)
-            if (this.player.body.onFloor()) {
+            if (tochinGround) {
                 this.player.play('playIdle', true)
             }
         }
-        if (this.cursors.up.isDown && this.player.body.onFloor()) {
-            this.player.setVelocityY(-333)
-            this.player.setOffset(0,100)
+        // if (this.cursors.up.isDown && this.player.body.onFloor()) {
+        if (this.cursors.up.isDown && tochinGround ) {
+            this.player.setVelocityY(-7)
+            tochinGround = false
             this.player.play('playJump', false)
         }
-
 
         if(this.player.y>650){
             this.setLives()

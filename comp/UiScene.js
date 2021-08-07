@@ -9,7 +9,7 @@ export default class UIScene extends Phaser.Scene
 
 	create()
 	{
-		this.score = this.add.text(840, 455, 'Score: 0', {
+		this.score = this.add.text(140, 660, 'Score: 0', {
 			fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
 			color: '#A52A2A',
 			fontSize: 35
@@ -20,7 +20,7 @@ export default class UIScene extends Phaser.Scene
       eventsCenter.off('update-count', this.updateCount, this)
     })
 
-		this.lives = this.add.text(640, 455, 'Lives: 3', {
+		this.lives = this.add.text(940, 660, 'Lives: 3', {
 			fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',
 			color: '#A52A2A',
 			fontSize: 35
