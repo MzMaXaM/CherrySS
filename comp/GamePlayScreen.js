@@ -34,14 +34,17 @@ class GamePlayScreen extends Phaser.Scene
 
         //-----------------------------------------------------------------
 
+        this.cursors = this.input.keyboard.createCursorKeys()
+
         this.createMap()
         this.createWater()
         this.createPlayer()
         this.createCoins()
-        this.player.setOnCollide(()=>{tochinGround=true})
-        this.scene.run('ui-scene')
 
-        this.cursors = this.input.keyboard.createCursorKeys()
+        this.scene.run('ui-scene')
+        this.player.setOnCollide((data)=>{
+            tochinGround=true
+        })
 
         this.cameras.main.setBounds(0,0,3120,520)
         this.cameras.main.startFollow(this.player)
@@ -107,25 +110,23 @@ class GamePlayScreen extends Phaser.Scene
             this.bCoin = this.add.sprite(coinObj.x+coinObj.width*0.5, coinObj.y, 'bCoin')
             this.bCoin.scale = 0.7
             this.aCoin = this.matter.add.polygon(coinObj.x+coinObj.width*0.5, coinObj.y, 1, 12)
-            this.aCoin.isSensor = true
-            this.matter.add.gameObject(this.bCoin, this.aCoin)
+            this.cCoin = this.matter.add.gameObject(this.bCoin, this.aCoin)
                 .setStatic(true)
-            
-            // this.bCoin.body.allowGravity = false
-            // this.bCoin.setCircle(20)
-            // this.bCoin.body.onOverlap = true
+                .setSensor(true)
+            this.cCoin.anims.play('coin1')
 
-            // this.matter.add.overlap(this.bCoin , this.player, this.setTheScore)
-
-            this.bCoin.anims.play('coin1')
+            this.cCoin.setOnCollide((data)=>{
+                this.setTheScore()
+                this.gameObj = data.bodyB.gameObject
+                this.gameObj.destroy()
+            })
             })
     }
 
 
     //---------------------------------------Score----------------------------------
-    setTheScore(coin, player){
+    setTheScore(){
         if(!this.count){this.count = 0}
-        coin.disableBody(true, true)
         this.count ++
         eventsCenter.emit('update-count', this.count)
     }
@@ -243,7 +244,7 @@ class GamePlayScreen extends Phaser.Scene
         }
         // if (this.cursors.up.isDown && this.player.body.onFloor()) {
         if (this.cursors.up.isDown && tochinGround ) {
-            this.player.setVelocityY(-7)
+            this.player.setVelocityY(-7.5)
             tochinGround = false
             this.player.play('playJump', false)
         }
