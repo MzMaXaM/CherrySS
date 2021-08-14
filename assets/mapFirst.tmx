@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.1" orientation="orthogonal" renderorder="right-down" width="51" height="10" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="19">
+<map version="1.5" tiledversion="1.7.1" orientation="orthogonal" renderorder="right-down" width="51" height="10" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="27">
  <editorsettings>
   <export target="mapFirst.json" format="json"/>
  </editorsettings>
@@ -7,56 +7,44 @@
   <image source="yellow64x64.png" width="256" height="384"/>
   <tile id="0">
    <properties>
+    <property name="steep" type="bool" value="false"/>
     <property name="type" value=""/>
    </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="steep" type="bool" value="false"/>
+    <property name="type" value="c"/>
+   </properties>
    <objectgroup draworder="index" id="2">
-    <object id="1" x="0" y="0" width="64" height="64"/>
+    <object id="13" x="63.6364" y="0.181818">
+     <polygon points="0,0 -52.5455,-0.181818 -59.4545,3.63636 -63.4545,11.0909 -63.8182,63.2727 0.181818,63.2727"/>
+    </object>
    </objectgroup>
   </tile>
   <tile id="1">
    <properties>
+    <property name="steep" type="bool" value="false"/>
     <property name="type" value="c"/>
    </properties>
    <objectgroup draworder="index" id="2">
     <object id="1" x="-0.181818" y="0.181818" width="64" height="63.8182"/>
    </objectgroup>
   </tile>
-  <tile id="2">
-   <properties>
-    <property name="type" value="c"/>
-   </properties>
-   <objectgroup draworder="index" id="2">
-    <object id="5" x="0" y="0" width="64" height="64"/>
-   </objectgroup>
-  </tile>
   <tile id="3">
    <properties>
+    <property name="steep" type="bool" value="false"/>
     <property name="type" value="c"/>
    </properties>
    <objectgroup draworder="index" id="2">
-    <object id="1" x="0" y="0" width="64" height="64"/>
+    <object id="2" x="0.363636" y="0.181818">
+     <polygon points="-0.909091,-0.363636 51.8182,-0.181818 58.9091,3.45455 63.4545,11.8182 63.6364,63.6364 -0.545455,63.4545"/>
+    </object>
    </objectgroup>
-  </tile>
-  <tile id="4">
-   <properties>
-    <property name="type" value="c"/>
-   </properties>
-   <objectgroup draworder="index" id="2">
-    <object id="1" x="0" y="0" width="64" height="64"/>
-   </objectgroup>
-  </tile>
-  <tile id="5">
-   <properties>
-    <property name="type" value=""/>
-   </properties>
-  </tile>
-  <tile id="6">
-   <properties>
-    <property name="type" value="c"/>
-   </properties>
   </tile>
   <tile id="7">
    <properties>
+    <property name="steep" type="bool" value="true"/>
     <property name="type" value="c"/>
    </properties>
    <objectgroup draworder="index" id="2">
@@ -67,71 +55,108 @@
   </tile>
   <tile id="8">
    <properties>
+    <property name="steep" type="bool" value="true"/>
     <property name="type" value="c"/>
    </properties>
    <objectgroup draworder="index" id="2">
     <object id="4" x="64" y="63.0909">
-     <polygon points="0,0 -64.1818,-63.8182 -64.1818,0.727273"/>
+     <polygon points="0.289135,1.01197 -64.0372,-63.2399 -64.1818,0.727273"/>
     </object>
    </objectgroup>
   </tile>
   <tile id="9">
    <properties>
+    <property name="steep" type="bool" value="true"/>
     <property name="type" value="c"/>
    </properties>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="63.8182" y="0">
+     <polygon points="0,0 -63.4545,63.6364 0.181818,63.8182"/>
+    </object>
+   </objectgroup>
   </tile>
   <tile id="10">
    <properties>
+    <property name="steep" type="bool" value="true"/>
     <property name="type" value="c"/>
    </properties>
-  </tile>
-  <tile id="11">
-   <properties>
-    <property name="type" value="c"/>
-   </properties>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0.181818" y="0">
+     <polygon points="0,0 63.6364,63.6364 -0.181818,63.6364"/>
+    </object>
+   </objectgroup>
   </tile>
   <tile id="12">
    <properties>
+    <property name="steep" type="bool" value="false"/>
     <property name="type" value="c"/>
    </properties>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="64" y="0">
+     <polygon points="0,0 -22,0 -32,12 -32,64 0,64"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="steep" type="bool" value="false"/>
+    <property name="type" value="c"/>
+   </properties>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0">
+     <polygon points="0,64 0,0 22,0 33,10 33,64"/>
+    </object>
+   </objectgroup>
   </tile>
   <tile id="13">
    <properties>
+    <property name="steep" type="bool" value="false"/>
     <property name="type" value="c"/>
    </properties>
+   <objectgroup draworder="index" id="2">
+    <object id="3" x="63.4545" y="0.363636">
+     <polygon points="0,0 -54.1818,0.181818 -63.0909,9.81818 -62.9091,25.8182 -35.0909,55.2727 0.727273,63.8182"/>
+    </object>
+   </objectgroup>
   </tile>
   <tile id="14">
    <properties>
+    <property name="steep" type="bool" value="false"/>
     <property name="type" value="c"/>
    </properties>
+   <objectgroup draworder="index" id="2">
+    <object id="4" x="0.363636" y="0.363636">
+     <polygon points="0,0 -0.181818,63.2727 22.5455,59.8182 41.6364,48.7273 63.2727,25.2727 63.4545,10.9091 52,-0.363636"/>
+    </object>
+   </objectgroup>
   </tile>
-  <tile id="15">
+  <tile id="19">
    <properties>
+    <property name="steep" type="bool" value="true"/>
+    <property name="type" value=""/>
+   </properties>
+  </tile>
+  <tile id="18">
+   <properties>
+    <property name="steep" type="bool" value="true"/>
+    <property name="type" value=""/>
+   </properties>
+  </tile>
+  <tile id="17">
+   <properties>
+    <property name="steep" type="bool" value="true"/>
     <property name="type" value="c"/>
    </properties>
   </tile>
   <tile id="16">
    <properties>
+    <property name="steep" type="bool" value="true"/>
     <property name="type" value="c"/>
-   </properties>
-  </tile>
-  <tile id="17">
-   <properties>
-    <property name="type" value="c"/>
-   </properties>
-  </tile>
-  <tile id="18">
-   <properties>
-    <property name="type" value=""/>
-   </properties>
-  </tile>
-  <tile id="19">
-   <properties>
-    <property name="type" value=""/>
    </properties>
   </tile>
   <tile id="20">
    <properties>
+    <property name="steep" type="bool" value="false"/>
     <property name="type" value="c"/>
    </properties>
    <objectgroup draworder="index" id="2">
@@ -140,6 +165,7 @@
   </tile>
   <tile id="21">
    <properties>
+    <property name="steep" type="bool" value="false"/>
     <property name="type" value="c"/>
    </properties>
    <objectgroup draworder="index" id="2">
@@ -148,63 +174,99 @@
   </tile>
   <tile id="22">
    <properties>
+    <property name="steep" type="bool" value="false"/>
+    <property name="type" value="c"/>
+   </properties>
+   <objectgroup draworder="index" id="2">
+    <object id="2" x="63.4545" y="0.181818">
+     <polygon points="0,0 -54.7273,0.181818 -63.2727,10 -63.0909,20 0.363636,63.4545"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="steep" type="bool" value="false"/>
+    <property name="type" value="c"/>
+   </properties>
+   <objectgroup draworder="index" id="2">
+    <object id="2" x="0.545455" y="0.363636">
+     <polygon points="0,0 54,-0.181818 63.0909,9.63636 63.2727,21.0909 -0.181818,63.2727"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="steep" type="bool" value="false"/>
     <property name="type" value="c"/>
    </properties>
   </tile>
-  <tile id="23">
+  <tile id="5">
    <properties>
+    <property name="steep" type="bool" value="false"/>
     <property name="type" value=""/>
    </properties>
   </tile>
+  <tile id="4">
+   <properties>
+    <property name="steep" type="bool" value="false"/>
+    <property name="type" value="c"/>
+   </properties>
+   <objectgroup draworder="index" id="2">
+    <object id="3" x="0.181818" y="63.6364">
+     <polygon points="0,0 63.6364,0.181818 63.6364,-53.6364 53.4545,-63.8182 8.54545,-63.2727 -0.181818,-52.9091"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="23"/>
  </tileset>
  <tileset firstgid="25" name="oneCoin" tilewidth="64" tileheight="64" tilecount="1" columns="1">
   <image source="oneCoin.png" width="64" height="64"/>
   <tile id="0" type="a"/>
  </tileset>
- <objectgroup id="4" name="Water">
-  <object id="14" type="w" x="1726.67" y="576">
+ <objectgroup id="4" name="Water" visible="0" offsetx="-1.45455" offsety="1.45455">
+  <object id="14" type="w" x="1728" y="576">
    <point/>
   </object>
-  <object id="15" type="w" x="2176" y="574.667">
+  <object id="15" type="w" x="2176" y="576">
    <point/>
   </object>
-  <object id="16" type="w" x="2496" y="574.667">
+  <object id="16" type="w" x="2496" y="576">
    <point/>
   </object>
-  <object id="17" type="w" x="2622.67" y="573.333">
-   <point/>
-  </object>
- </objectgroup>
- <objectgroup id="5" name="Portal">
-  <object id="18" type="p" x="3109.33" y="253.333">
+  <object id="17" type="w" x="2624" y="576">
    <point/>
   </object>
  </objectgroup>
- <layer id="1" name="Ground" width="51" height="10" offsetx="0" offsety="8">
+ <objectgroup id="5" name="Portal" visible="0">
+  <object id="18" type="p" x="3200" y="257">
+   <point/>
+  </object>
+ </objectgroup>
+ <layer id="1" name="Ground" width="51" height="10" offsetx="-1" offsety="0">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,14,2,2,2,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,14,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14,15,0,0,0,0,0,0,0,0,0,0,0,0,14,2,15,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,3,2,2,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,2,2,16,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,17,16,6,6,16,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,6,6,1,
-18,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,17,1,1,1,1,1,18,2,2,2,4,0,0,3,2,2,2,4,0,0,3,2,4,0,0,0,0,3,2,2,22,6,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,16,0,0,16,6,1,6,16,0,0,16,6,16,0,0,0,0,16,6,6,6,16,1,1,1,
+0,0,0,0,0,0,0,0,23,22,21,2,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,14,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,2,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14,2,15,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14,2,2,2,12,18,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,2,2,17,
+9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,6,1,1,1,16,18,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,22,12,1,1,
+18,2,2,2,2,2,2,2,2,2,2,2,2,2,2,12,1,1,1,1,1,1,16,1,18,2,4,0,0,3,2,2,2,4,0,0,3,2,4,0,0,0,0,3,2,2,17,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,18,2,2,2,2,2,12,6,1,1,6,16,0,0,16,6,1,6,16,0,0,16,6,16,0,0,0,0,16,6,1,6,16,13,2,17,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,0,0,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1
 </data>
  </layer>
- <objectgroup id="3" name="Coins">
+ <objectgroup id="3" name="Coins" visible="0">
   <object id="1" gid="25" x="289.333" y="225.333" width="64" height="64"/>
   <object id="2" gid="25" x="574.667" y="158.666" width="64" height="64"/>
   <object id="3" gid="25" x="706.667" y="157.334" width="64" height="64"/>
-  <object id="4" gid="25" x="1312" y="288" width="64" height="64"/>
-  <object id="5" gid="25" x="1632" y="225.333" width="64" height="64"/>
+  <object id="4" gid="25" x="1472" y="320" width="64" height="64"/>
+  <object id="5" gid="25" x="1536" y="384" width="64" height="64"/>
   <object id="6" gid="25" x="1922.67" y="416" width="64" height="64"/>
   <object id="7" gid="25" x="2049.34" y="416" width="64" height="64"/>
-  <object id="8" gid="25" x="2562.67" y="290.666" width="64" height="64"/>
+  <object id="8" gid="25" x="2560.67" y="219.666" width="64" height="64"/>
   <object id="9" gid="25" x="2848" y="416" width="64" height="64"/>
-  <object id="10" type="a" gid="25" x="3017.33" y="288" width="64" height="64"/>
+  <object id="10" type="a" gid="25" x="3007.33" y="288" width="64" height="64"/>
   <object id="12" gid="25" x="1185.33" y="289.333" width="64" height="64"/>
   <object id="13" gid="25" x="2368" y="418.667" width="64" height="64"/>
  </objectgroup>

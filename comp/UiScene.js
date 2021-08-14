@@ -15,9 +15,9 @@ export default class UIScene extends Phaser.Scene
 			fontSize: 35
 		})
     
-    eventsCenter.on('update-count', this.updateCount, this)
+    eventsCenter.on('update-score', this.updateScore, this)
     this.events.on(Phaser.Scenes.Events.SHUTDOWN, () => {
-      eventsCenter.off('update-count', this.updateCount, this)
+      eventsCenter.off('update-score', this.updateCount, this)
     })
 
 		this.lives = this.add.text(940, 660, 'Lives: 3', {
@@ -32,7 +32,7 @@ export default class UIScene extends Phaser.Scene
     })
 	}
 
-	updateCount(count)
+	updateScore(count)
 	{
 		this.score.text = `Score: ${count}`
 	}
