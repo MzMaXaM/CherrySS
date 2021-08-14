@@ -20,7 +20,7 @@ var config = {
       mode: Phaser.Scale.FIT,
       autoCenter: Phaser.Scale.CENTER_BOTH,
   },
-  scene: [ GamePlayScreen,WelcomeScreen,  UiScene, GameOver ]
+  scene: [ WelcomeScreen, GamePlayScreen, UiScene, GameOver ]
 }
 
 var game = new Phaser.Game(config)
