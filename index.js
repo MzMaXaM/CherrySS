@@ -13,7 +13,7 @@ var config = {
       default: 'matter',
       matter: {
         gravity: { y: .3, x:0 },
-        debug: true
+        debug: false
       }
   },
   scale: {
