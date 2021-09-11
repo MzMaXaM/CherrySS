@@ -1,5 +1,3 @@
-// import Phaser from 'phaser'
-
 import WelcomeScreen from "./comp/WelcomeScreen.js"
 import GamePlayScreen from "./comp/GamePlayScreen.js"
 import GameOver from "./comp/GameOverScreen.js"

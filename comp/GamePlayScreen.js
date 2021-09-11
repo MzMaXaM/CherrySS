@@ -1,10 +1,6 @@
-// import Phaser from 'phaser'
-
 import eventsCenter from "./EventCentre.js"
 
-
 let tochinGround
-let isJumping =false
 let onSteep = false
 
 class GamePlayScreen extends Phaser.Scene
@@ -16,9 +12,13 @@ class GamePlayScreen extends Phaser.Scene
 //=========================================================================================================
 //-----------------------------------------PRELOAD------------------------------------------------------
     preload (){
-        this.load.image('springBack1', './assets/bg_spring_Trees_1.png')
-        this.load.image('springBack2', './assets/bg_spring_Trees_2.png')
+        this.load.image('foreground1', './assets/bg_1_foreground.png')
+        this.load.image('midground1', './assets/bg_2_midground_1.png')
+        this.load.image('midground2', './assets/bg_2_midground_2.png')
+        this.load.image('sky1', './assets/bg_3_sky_1.png')
+        this.load.image('sky2', './assets/bg_3_sky_2.png')
 
+        this.load.image('portal', './assets/oneCoin.png')
         this.load.image('tileSet', './assets/yellow64x64e.png')
         this.load.tilemapTiledJSON('FirstMap', './assets/mapFirst.json')
         this.load.atlas('bCoin', './assets/bronze_coin.png', './assets/bronze_coin_atlas.json')
@@ -29,35 +29,26 @@ class GamePlayScreen extends Phaser.Scene
     //------------------------------------CREATE-------------------------------------------------------  
     create (){
         this.matter.world.setBounds(0, 0, 3264, 720)
-        //----------------------------Temp Background
-        //----------------------planning to add Parallax Effect Background
-        const wit = 780/2
-        this.add.image(wit+60, 310, 'springBack1')
-        this.add.image(3*wit+60, 310, 'springBack2')
-        this.add.image(5*wit+60, 310, 'springBack1')
-        this.add.image(7*wit+60, 310, 'springBack2')
-
-        //-----------------------------------------------------------------
-
         this.cursors = this.input.keyboard.createCursorKeys()
-
+        
+        this.createBackGround()
         this.createMap()
         this.createWater()
         this.createPlayer()
         this.createCoins()
+        this.createPortal()
 
         this.scene.run('ui-scene')
+
         this.player.setOnCollide((data)=>{
             let bodyA = data.bodyA.gameObject
             let bodyB = data.bodyB.gameObject
             if(!bodyA || !bodyB){return}
             
             if (bodyA.tile){
-                isJumping = false
                 tochinGround = true
                 data.bodyA.gameObject.tile.properties.steep?onSteep=true:onSteep=false
             }else if (bodyB.tile){
-                isJumping = false
                 tochinGround = true
                 data.bodyB.gameObject.tile.properties.steep?onSteep=true:onSteep=false
             }else {
@@ -65,12 +56,25 @@ class GamePlayScreen extends Phaser.Scene
             }
         })
 
-        this.cameras.main.setBounds(0,0,3264,520)
-        this.cameras.main.startFollow(this.player)
+        this.cameras.main.setBounds(0,0,3264,520).startFollow(this.player)
     }
     //===========================================================================================
 
 
+    //------------------------Parralax Background------------------------------------
+    createBackGround(){
+        const height = this.scale.height
+        const imgWidth = 1200
+
+        this.add.image(0, 0, 'sky1').setOrigin(0).setScrollFactor(0.25,0).setDepth(-1)
+        this.add.image(imgWidth, 0, 'sky2').setOrigin(0).setScrollFactor(0.25,0).setDepth(-1)
+        this.add.image(0, height+50, 'midground1').setOrigin(0,1).setScrollFactor(0.5,0).setDepth(-1)
+        this.add.image(imgWidth, height+50, 'midground2').setOrigin(0,1).setScrollFactor(0.5,0).setDepth(-1)
+        this.add.image(0, height, 'foreground1').setOrigin(0,1).setScrollFactor(1.25,0).setDepth(1)
+        this.add.image(imgWidth, height, 'foreground1').setOrigin(0,1).setScrollFactor(1.25,0).setDepth(1)
+        this.add.image(imgWidth*2, height, 'foreground1').setOrigin(0,1).setScrollFactor(1.25,0).setDepth(1)
+        this.add.image(imgWidth*3, height, 'foreground1').setOrigin(0,1).setScrollFactor(1.25,0).setDepth(1)
+    }
 
     //---------------------------Water----------------------------------------------
     createWater(){
@@ -95,6 +99,26 @@ class GamePlayScreen extends Phaser.Scene
             this.aWater.anims.play('water')
         })
     }
+    
+    //---------------------------Portal----------------------------------------------
+    createPortal(){
+        
+            const particles = this.add.particles('portal')
+            
+            particles.createEmitter({
+                key: 'Portal',
+                x: 3200, y: 333,
+                lifespan: 600,
+                tint:  0xffff00,
+                angle: { start: 0, end: 360, steps: 360 },
+                speed: 100,
+                quantity: 8,
+                frequency: 5,
+                scale: { start: 0.6, end: 0 },
+                blendMode: 'ADD'
+            })
+    }
+
     //----------------------------Map--------------------------------------------------
     createMap(){
         this.map = this.make.tilemap({ key: 'FirstMap' })
@@ -103,8 +127,6 @@ class GamePlayScreen extends Phaser.Scene
         this.map.setCollisionByProperty({type: 'c'}, true)
         this.matter.world.convertTilemapLayer(this.ground)
     }
-    
-
 
     //----------------------------------Coins-----------------------------------------------
     createCoins(){
@@ -161,10 +183,6 @@ class GamePlayScreen extends Phaser.Scene
         }
     }
 
-    onEvent(){
-        this.player.play('playFall', true)
-    }
-
     //-----------------------------Player-----------------------------------------
     createPlayer(){
         //create the player phisics
@@ -172,20 +190,12 @@ class GamePlayScreen extends Phaser.Scene
         this.square = this.matter.add.rectangle(100, 300, 90, 75, { 
             chamfer: { radius: 15 }
         })
-        // this.circleBig = this.matter.add.circle(100, 300, 33)
-        // this.circleSmal = this.matter.add.circle(120, 280, 23)
-        // this.playerBody = this.matter.add.body({
-        //     parts:[this.circleBig, this.circleSmal]
-        // })
-
 
         const player = this.matter.add.gameObject(this.player, this.square)
             .setFriction(0)
             .setBounce(0.2)
-            .setMass(999)
+            // .setMass(999)
             // .setFixedRotation()
-            
-
 
         //creating the animations for the player
 
@@ -239,26 +249,24 @@ class GamePlayScreen extends Phaser.Scene
 
 //========================================================================================================
 //--------------------------UPDATE-----------------------------------
-    update (t, dt){
+    update (){
+        const speed = 2
+        
+        if(this.player.y>650){
+            this.setLives()
+            this.player.y=250
+            this.player.x=150
+        }
+        if (this.player.y>550){
+            this.player.setVelocityY(0.5)
+            return
+        }
+
         if (onSteep){
             if (this.player.angle>47){this.player.angle-=5}
             if (this.player.angle<-47){this.player.angle+=5}
         }else{this.player.angle=0}
 
-        const speed = 2
-
-        // if (this.cursors.down.isDown && !this.player.body.onFloor()){
-        //     this.player.setVelocityY(350)
-        //     this.player.play('playFall', true)
-        // }
-
-        if (!tochinGround){
-            if(isJumping){return}else{
-                this.player.play('playFall', true)
-            }
-            
-            // this.time.delayedCall(450, this.onEvent, [], this)
-        }
 
         if (this.cursors.left.isDown) {
             this.player.setVelocityX(-speed)
@@ -272,8 +280,10 @@ class GamePlayScreen extends Phaser.Scene
             if (tochinGround) {
                 this.player.play('playRun', true)
             }
-        } else {
-            this.player.setVelocityX(0)
+        } else if (this.cursors.right.isUp || this.cursors.left.isUp){
+            if (!onSteep){
+                this.player.setVelocityX(0)
+            }
             if (tochinGround) {
                 this.player.play('playIdle', true)
             }
@@ -282,16 +292,8 @@ class GamePlayScreen extends Phaser.Scene
         if (this.cursors.up.isDown && tochinGround ) {
             this.player.setVelocityY(-7.5)
             tochinGround = false
-            isJumping = true
             this.player.play('playJump', false)
             this.time.delayedCall(450,()=>{this.player.play('playFall', true)}, [], this)
-            // 
-        }
-
-        if(this.player.y>650){
-            this.setLives()
-            this.player.y=250
-            this.player.x=150
         }
     }
 }
